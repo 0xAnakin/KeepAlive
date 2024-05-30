@@ -1,0 +1,1 @@
+A simple program that will press space based on a given interval - made to prevent dc / timeouts in online games.
