@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
         
         // sleep interval
         int interval_in_minutes = std::rand() % (max - min + 1) + min;
-        /*
+        
         // Create an array of INPUT structures to hold the inputs
         INPUT inputs[2] = {};
 
@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
             // MessageBox(NULL, L"Failed to send SPACE key input.", L"Error", MB_OK | MB_ICONERROR);
             std::cerr << "Failed to send SPACE key input" << std::endl;
         }
-        */
+        
         std::cout << "Sleeping for " << interval_in_minutes << "mins" << std::endl;
         
         std::this_thread::sleep_for(std::chrono::minutes(interval_in_minutes));
