@@ -41,6 +41,39 @@ bool is_valid_integer_integer(const std::string& str)
     return true;
 }
 
+
+
+/*
+void send_input_impl() 
+{
+
+    
+    // Create an array of INPUT structures to hold the inputs
+    INPUT inputs[2] = {};
+
+    // Set up the INPUT structure for a key press event
+    inputs[0].type = INPUT_KEYBOARD;  // Specify input type as keyboard
+    inputs[0].ki.wVk = VK_SPACE;      // Virtual-key code for the SPACE key
+
+    // Set up the INPUT structure for a key release event
+    inputs[1].type = INPUT_KEYBOARD;  // Specify input type as keyboard
+    inputs[1].ki.wVk = VK_SPACE;      // Virtual-key code for the SPACE key
+    inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;  // Specify key release event
+
+    // Send the inputs to the system
+    UINT uSent = SendInput(2, inputs, sizeof(INPUT));
+
+    if (uSent != 2)  // Check if all inputs were successfully sent
+    {
+        // If the function fails, it returns 0
+        // MessageBox(NULL, L"Failed to send SPACE key input.", L"Error", MB_OK | MB_ICONERROR);
+        std::cerr << "Failed to send SPACE key input" << std::endl;
+    }
+
+}
+*/
+
+
 int main(int argc, char* argv[])
 {   
 
@@ -81,27 +114,15 @@ int main(int argc, char* argv[])
         // sleep interval
         int interval_in_minutes = std::rand() % (max - min + 1) + min;
         
-        // Create an array of INPUT structures to hold the inputs
-        INPUT inputs[2] = {};
+        //keybd_event(VK_SPACE, 0, 0, 0);
 
-        // Set up the INPUT structure for a key press event
-        inputs[0].type = INPUT_KEYBOARD;  // Specify input type as keyboard
-        inputs[0].ki.wVk = VK_SPACE;      // Virtual-key code for the SPACE key
+        // Simulate a key press
+        keybd_event(VK_SPACE, 0x39, 0, 0);
 
-        // Set up the INPUT structure for a key release event
-        inputs[1].type = INPUT_KEYBOARD;  // Specify input type as keyboard
-        inputs[1].ki.wVk = VK_SPACE;      // Virtual-key code for the SPACE key
-        inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;  // Specify key release event
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
 
-        // Send the inputs to the system
-        UINT uSent = SendInput(2, inputs, sizeof(INPUT));
-
-        if (uSent != 2)  // Check if all inputs were successfully sent
-        {
-            // If the function fails, it returns 0
-            // MessageBox(NULL, L"Failed to send SPACE key input.", L"Error", MB_OK | MB_ICONERROR);
-            std::cerr << "Failed to send SPACE key input" << std::endl;
-        }
+        // Simulate a key release
+        keybd_event(VK_SPACE, 0x39, KEYEVENTF_KEYUP, 0);
         
         std::cout << "Sleeping for " << interval_in_minutes << "mins" << std::endl;
         
